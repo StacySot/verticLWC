@@ -1,0 +1,16 @@
+.slds-table {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slds-form {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    background-color: #ffffff;
+    width: 450px;
+    height: 50px;
+    border-radius: 5px;
+}

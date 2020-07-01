@@ -1,0 +1,60 @@
+<template>
+    <form class="slds-form slds-form_inline slds-var-m-top_large slds-var-m-bottom_large slds-var-m-left_medium">
+        <lightning-input 
+            type="search"
+            label="Search"
+            data-element="search"
+            placeholder="search here"
+            value={name}>
+        </lightning-input>
+        <lightning-button
+            label = "Filter"
+            onclick={filterName}>
+        </lightning-button>
+        <lightning-button
+            label = "New"
+            onclick={newContact}>
+        </lightning-button>
+    </form>
+
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+        <caption class="slds-caption slds-text-heading_large">Contact</caption>
+        <thead>
+            <tr class="slds-text-title_caps">
+
+                <th>
+                    <div class="slds-truncate">FIRST NAME</div>
+                </th>
+
+                <th>
+                    <div class="slds-truncate">LAST NAME</div>
+                </th>
+
+                <th>
+                    <div class="slds-truncate">EMAIL</div>
+                </th>
+
+                <th>
+                    <div class="slds-truncate">ACCOUNT</div>
+                </th>
+
+                <th>
+                    <div class="slds-truncate">MOBILE PHONE</div>
+                </th>
+
+                <th>
+                    <div class="slds-truncate">CREATED DATE</div>
+                </th>
+
+                <th>
+                    <div class="slds-truncate">Delete</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={aContact} for:item="contact">
+                <c-vertic-list contact={contact} key={contact.Id} onrendercontact={renderContact}></c-vertic-list>
+            </template>
+        </tbody>
+    </table>
+</template>

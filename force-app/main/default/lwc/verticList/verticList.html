@@ -1,0 +1,127 @@
+<template>
+
+    <td>
+        <span class="slds-truncate" title="First Name">{contact.FirstName}</span>
+    </td>
+
+    <td>
+        <span class="slds-truncate" title="Last Name">{contact.LastName}</span>
+    </td>
+
+    <td>
+        <span class="slds-truncate" title="EMAIL">{contact.Email}</span>
+    </td>
+
+    <td>
+        <template if:true={contact.Account}>
+            <span class="slds-truncate" title="Account">
+                <a data-account-id={contact.AccountId} onclick={toAccount}>{contact.Account.Name}</a>
+            </span>
+        </template>
+    </td>
+
+    <td>
+        <span class="slds-truncate" title="Mobile Phone">{contact.MobilePhone}</span>
+    </td>
+
+    <td>
+        <span class="slds-truncate">
+            <lightning-formatted-date-time 
+                value={contact.CreatedDate}>
+            </lightning-formatted-date-time>
+        </span>
+    </td>
+
+    <td onmouseover={withColorDeleteButton} onmouseout={withoutColorDeleteButton} data-contactid={contact.Id}>
+        <lightning-button-icon 
+            class="deleteButton"
+            icon-name='utility:delete' 
+            data-deletebutton="delete" 
+            onclick={OpenDeletePopUp} 
+            style="cursor:pointer">
+        </lightning-button-icon>
+    </td>
+<!--Create Pop Up-->
+    <template if:true={createPopUp}>
+        <div style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create contact</h2>
+                    </header>
+                    <div class="slds-modal__content">
+                        <center>
+                            <lightning-record-edit-form
+                                record-id={recordId}>
+                            </lightning-record-edit-form>
+
+                            <lightning-input-field
+                                field-name="First Name">
+                            </lightning-input-field>
+
+                            <lightning-input-field
+                                field-name="Last Name">
+                            </lightning-input-field>
+
+                            <lightning-input-field
+                                field-name="Email">
+                            </lightning-input-field>
+
+                            <lightning-input-field
+                                field-name="Account">
+                            </lightning-input-field>
+
+                            <lightning-input-field
+                                field-name="MobilePhone">
+                            </lightning-input-field>
+
+                        </center>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button
+                            label="Cancel"
+                            variant="neutral"
+                            onclick={cancel}>
+                        </lightning-button>
+                        <lightning-button
+                            label="Save"
+                            variant="brand"
+                            onclick={save}>
+                        </lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+<!--Delete Pop Up-->
+    <template if:true={deletePopUp}>
+        <div style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Delete contact</h2>
+                    </header>
+                    <div class="slds-modal__content">
+                        <center>
+                            <h2>Are you sure you want to delete this contact?</h2>
+                        </center>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button
+                        label="No"
+                        variant="neutral"
+                        onclick={closeDeletePopUp}>
+                        </lightning-button>
+                        <lightning-button
+                        label="Yes"
+                        variant="brand"
+                        onclick={YesDeletePopUp}>
+                        </lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>
